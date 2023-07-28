@@ -1,9 +1,7 @@
 import express from "express";
 import { engine } from "express-handlebars";
 import bodyParser from "body-parser";
-// import SettingsBill from "./public/js/settings-bill.js";
-
-// import moment from 'moment';
+import greetUsers from "./public/js/greetings.js";
 
 
 let app = express();
@@ -21,6 +19,14 @@ app.use(bodyParser.json());
 app.get("/", function(req, res){
   res.render("home");
 });
+
+
+app.post("/greet", (req, res) => {
+  console.log(req.body)
+  res.redirect("/");
+});
+
+
 
 let PORT = process.env.PORT || 3000;
 
