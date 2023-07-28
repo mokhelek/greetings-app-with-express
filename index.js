@@ -16,13 +16,28 @@ app.set("views", "./views");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+
+let greetUsersInstance = greetUsers()
+
+
 app.get("/", function(req, res){
-  res.render("home");
+  // TODO : -> Get the counter and the greeting
+
+  let userGreeting = greetUsersInstance.getUserGreeting()
+  let userCount = greetUsersInstance.getCounter()
+
+
+  res.render("home", {
+    userCount,
+    userGreeting
+  });
 });
 
 
 app.post("/greet", (req, res) => {
-  console.log(req.body)
+  greetUsersInstance.setLanguage(req.body.greetingLanguage)
+  greetUsersInstance.setUserName(req.body.nameInput)
+
   res.redirect("/");
 });
 
