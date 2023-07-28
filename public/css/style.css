@@ -1,0 +1,93 @@
+
+
+body{
+    background-color: rgb(66, 66, 66)  ;
+    background-size: cover;
+    color: rgb(201, 201, 201) ;
+
+}
+
+#greet-btn {
+    background-color: rgb(255, 183, 48);
+    color: rgb(255, 255, 255);
+    font-size: 1.1rem;
+    padding: 0.6rem 0.8rem 0.6rem 0.8rem;
+    border: none;
+    background: linear-gradient(45deg, rgb(250, 219, 45) 0%, rgb(248, 45, 180) 50%, rgb(136, 45, 248) 100%);
+    border-radius: 25px;
+    transition: transform 0.5s ease;
+}
+
+#greet-btn:hover {
+    background: linear-gradient(45deg, rgb(136, 45, 248) 0%, rgb(224, 45, 248) 50%, rgb(250, 219, 45) 100%);
+    /* border: 3px rgb(255, 244, 252) dotted; */
+    transform: scale(1.1);
+}
+h1{
+    color: rgb(255, 112, 248);
+    font-weight: 700;
+    /* text-shadow: 0px 10px 6px rgb(26, 26, 26); */
+    font-size: 3rem;
+}
+
+#title-text{
+    font-size: 4rem;
+    text-shadow: 0 0 6px rgb(252, 147, 165);
+}
+
+#validation-error{
+    border: 1px rgba(246, 76, 76, 0.453) solid;
+    border-radius: 25px;
+    background-color: rgba(238, 64, 64, 0.149);
+    color: rgb(250, 192, 192);padding: 0.5rem;
+    display: none;
+}
+
+#user-exist-error{
+    border: 1px rgba(246, 204, 76, 0.453) solid;
+    border-radius: 25px;
+    background-color: rgba(245, 179, 71, 0.149);
+    color: rgb(249, 214, 173);padding: 0.5rem;
+    display: none;
+}
+
+
+#validation-success{
+    border: 1px rgba(127, 246, 76, 0.453) solid;
+    border-radius: 25px;
+    background-color: rgba(64, 238, 76, 0.149);
+    color: rgb(190, 252, 173);padding: 0.5rem;
+    display: none;
+}
+
+#name-input{
+    border-radius: 0;
+    background-color: rgba(255, 126, 255, 0.122);
+    border: 2px rgb(235, 96, 120) dashed; box-shadow: none;
+    height: 50px; color: rgb(215, 215, 215);
+    
+}
+#radios{
+    margin: 2rem 0rem 2rem 0rem;
+}
+#counter-box{
+    border: 2px rgb(209, 42, 255) dashed;
+     box-shadow: 0 0 6px purple
+}
+.greet-counter{
+    font-size: 7rem; 
+    font-weight: 900;
+    text-shadow: 0 0 6px rgb(252, 147, 165);
+
+}
+#counter-subtext{
+    font-size: 1.2rem;
+    color:rgb(222, 193, 250);
+}
+
+
+@media screen and (max-width:450px) {
+    #content-width{
+        width: 85% !important;
+    }
+}
