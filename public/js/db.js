@@ -1,12 +1,12 @@
 import pgPromise from "pg-promise";
-
+import 'dotenv/config'
 
 const connection = {
-    host: 'dpg-cj1p1d6nqqla1dibjvs0-a.oregon-postgres.render.com',
+    host: process.env.DATABASE_HOST,
     port: 5432,
     database: 'greetings_postgresql',
     user: 'greetings_postgresql_user',
-    password: 'TvueAuamk9ZUOc7UjzSUIoTbzAENDNiF',
+    password: process.env.DATABASE_PASSWORD,
     max: 30,
     ssl: true
 
