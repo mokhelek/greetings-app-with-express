@@ -1,23 +1,19 @@
- export default function greetUsers(counter) {
-
-    var greetCounter = counter || 0;
+export default function greetUsers() {
+    // var greetCounter = counter || 0;
 
     let greetedUserName = "";
     let greetLanguage = "";
-    var greetedUsers = {};
+    // var greetedUsers = {};
 
     function setUserName(userName) {
-        greetedUserName = userName.toLowerCase() ;
+        greetedUserName = userName.toLowerCase();
     }
 
     function getUserName() {
         return greetedUserName;
     }
 
-    function userExist(validate){
-        return validate;
-    }
-
+    /*
     function setCounter() {
         if (greetedUsers[getUserName()] === undefined && getUserName() != "" ) {
             greetCounter++;
@@ -28,12 +24,13 @@
         }
         greetedUsers[getUserName()]++;
     }
-
+ 
+    
     function getCounter() {
        
         return greetCounter;
     }
-
+   */
     function setLanguage(language) {
         greetLanguage = language;
     }
@@ -53,37 +50,33 @@
             return "Dumela";
         }
     }
-
+    /*
     function getGreetedUsers() {
         return greetedUsers;
     }
+    */
 
     function getUserGreeting() {
-        setCounter();
+        // setCounter();
         return getLanguagesGreet() + ", " + greetedUserName;
     }
 
-    function clearStorage() {
-        localStorage.clear();
-    }
-
     function checkValidName(userName) {
-        const regex = /^[A-Za-z\s]+$/
+        const regex = /^[A-Za-z\s]+$/;
         return regex.test(userName);
     }
 
     return {
         getUserName,
-        getCounter,
+        // getCounter,
         getLanguage,
         getUserGreeting,
         getLanguagesGreet,
-        getGreetedUsers,
+        // getGreetedUsers,
         setLanguage,
         setUserName,
 
-        clearStorage,
         checkValidName,
-        userExist,
+        // userExist,
     };
 }
