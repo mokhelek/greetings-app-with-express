@@ -1,20 +1,39 @@
-<div  class="container d-flex justify-content-center">
-    <div class="col-12 col-sm-11 col-lg-7 col-md-8">
-        <center>
-            <h1 style="margin-top: 2rem;" >Greeted Users</h1>
-        </center>
 
-        {{#each greetedUsersData}}
-            <div style="padding: 0.6rem;border-bottom:1px rgba(255, 255, 255, 0.237) solid" class="row">
-          
-                <div style="position:relative ;" class="col">
-                    
-                    <span><img height="55" src="/images/90470.png" alt=""></span> 
-                    <span>{{this.username}}</span>
-                    <span style="position: absolute;right:0" ><button  class="btn btn-outline-secondary" >View</button></span>
-                </div>
+<div class="container">
 
+
+        <div style="float: left;">
+            <h4 style="margin-top: 4rem;letter-spacing:0.5rem;font-weight:400;font-size:1.1rem">
+                <a href="/" style="text-decoration: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z" />
+                    </svg>
+                    Back
+                </a>
+            </h4>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="col-12 col-sm-11 col-md-8">
+                <center>
+                    <h1 style="margin-top: 2rem;">Greeted Users</h1>
+                </center>
+
+                {{#each greetedUsersData}}
+                    <div style="padding: 0.6rem;border-bottom:1px rgba(255, 255, 255, 0.237) solid" class="row">
+
+                        <div style="position:relative ;" class="col">
+
+                            <span><img height="55" src="/images/90470.png" alt="" /></span>
+                            <span>{{this.username}}</span>
+                            <span style="position: absolute;right:0;bottom:0;margin-bottom:1rem">
+                                <a href="/counter/{{this.username}}" style="color:rgb(250, 124, 145);border:1px rgb(255, 159, 175) solid" class="btn btn-outline-secondary btn-sm">View</a>
+                            </span>
+                        </div>
+
+                    </div>
+                {{/each}}
             </div>
-        {{/each}}
-    </div>
+        </div>
+
 </div>

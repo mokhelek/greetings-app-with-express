@@ -53,8 +53,11 @@ app.get("/greeted", async (req, res) =>{
     res.render("greeted_users", {greetedUsersData})
 });
 
-app.get("/counter/:username", function (req, res) {
-    // TODO : -> Show info of how many times a specific user has been greeted
+app.get("/counter/:username", async (req, res) => {
+  
+    const userData = await db.oneOrNone('SELECT * FROM greetings WHERE username = $1', [req.params.username]);
+
+    res.render("user_count", userData)
 });
 
 /*
