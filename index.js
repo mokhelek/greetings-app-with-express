@@ -49,7 +49,7 @@ app.post("/greet", (req, res) => {
 
 app.get("/greeted", async (req, res) =>{
     let greetedUsersData = await db.any("SELECT * FROM greetings");
-    console.log(greetedUsersData)
+
     res.render("greeted_users", {greetedUsersData})
 });
 

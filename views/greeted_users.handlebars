@@ -1,13 +1,20 @@
-<h1>Greeted Users</h1>
+<div  class="container d-flex justify-content-center">
+    <div class="col-12 col-sm-11 col-lg-7 col-md-8">
+        <center>
+            <h1 style="margin-top: 2rem;" >Greeted Users</h1>
+        </center>
 
-<table>
+        {{#each greetedUsersData}}
+            <div style="padding: 0.6rem;border-bottom:1px rgba(255, 255, 255, 0.237) solid" class="row">
+          
+                <div style="position:relative ;" class="col">
+                    
+                    <span><img height="55" src="/images/90470.png" alt=""></span> 
+                    <span>{{this.username}}</span>
+                    <span style="position: absolute;right:0" ><button  class="btn btn-outline-secondary" >View</button></span>
+                </div>
 
-    {{#each greetedUsersData}}
-        <tr>
-            <td>{{this.username}}</td>
-            <td>{{this.counter}}</td>
-        </tr>
-
-    {{/each}}
-
-</table>
+            </div>
+        {{/each}}
+    </div>
+</div>

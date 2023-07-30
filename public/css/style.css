@@ -78,6 +78,7 @@ h1{
     font-size: 7rem; 
     font-weight: 900;
     text-shadow: 0 0 6px rgb(252, 147, 165);
+    letter-spacing: 0.5rem ;
 
 }
 #counter-subtext{
