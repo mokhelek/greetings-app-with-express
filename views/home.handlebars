@@ -91,7 +91,7 @@
                             <form action="/greet" method="post">
 
                                 <div class="mb-3">
-                                    <input  name="nameInput" type="text" id="name-input" class="form-control user-name-input" placeholder="type your name ..." />
+                                    <input name="nameInput" type="text" id="name-input" class="form-control user-name-input" placeholder="type your name ..." />
                                 </div>
 
                                 <div id="radios">
@@ -149,14 +149,23 @@
                         </div>
                         <br />
                     </div>
-                    <div id="counter-box" class="col-lg-4">
-                        <br />
-                        <br />
+                    <div style="margin-bottom:4rem;position:relative" id="counter-box" class="col-lg-4">
                         <center>
                             <h1 class="greet-counter">{{userCount}}</h1>
-
                             <p><span style="color: rgb(238, 84, 110);">#</span><span id="counter-subtext">No. of greeted users</span> </p>
                         </center>
+
+                        <div style="position:absolute;bottom:0;right:50;left:50">
+                            <center>
+                                <a href="/greeted" class="btn" style="margin-bottom: 2rem;color:rgb(255, 224, 229);border:2px rgb(255, 216, 222) solid">
+                                    Greeted Users &nbsp;
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-box-arrow-up-right" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z" />
+                                        <path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z" />
+                                    </svg>
+                                </a>
+                            </center>
+                        </div>
                     </div>
                 </div>
             </div>

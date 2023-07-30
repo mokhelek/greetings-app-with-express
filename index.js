@@ -12,7 +12,7 @@ app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 
-// parse application/x-www-form-urlencoded
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -38,25 +38,19 @@ app.post("/greet", (req, res) => {
     greetUsersInstance.setLanguage(req.body.greetingLanguage);
     greetUsersInstance.setUserName(req.body.nameInput);
 
+    
 
-
-    db.none('INSERT INTO greetings(username, counter) VALUES($1, $2)',[req.body.nameInput,1])
+    db.none('INSERT INTO greetings (username, counter) VALUES ($1, $2) ON CONFLICT (username) DO UPDATE SET counter = greetings.counter + 1',[req.body.nameInput,1])
     .then(() => {
       res.redirect("/");
     })
-    .catch((error) => {
-      console.error('Error inserting data:', error);
-      res.status(500).json({ message: 'Failed to add data to the database' });
-    });
 
-
-
-
-    
 });
 
-app.get("/greeted", function (req, res) {
-    // TODO : -> A list of all the greeted users
+app.get("/greeted", async (req, res) =>{
+    let greetedUsersData = await db.any("SELECT * FROM greetings");
+    console.log(greetedUsersData)
+    res.render("greeted_users", {greetedUsersData})
 });
 
 app.get("/counter/:username", function (req, res) {
