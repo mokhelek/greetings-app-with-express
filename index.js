@@ -31,7 +31,12 @@ app.use(bodyParser.json());
 let greetUsersInstance = greetUsers();
 
 app.get("/", async (req, res) => {
-    let userGreeting = greetUsersInstance.getUserGreeting();
+    let userGreeting = false;
+    console.log( greetUsersInstance.getUserGreeting() )
+    if( greetUsersInstance.getUserGreeting() != "undefined," ){
+        userGreeting = greetUsersInstance.getUserGreeting();
+    }
+
     let userCount = 0;
 
     let greetedUsersData = await db.any("SELECT * FROM greetings");
@@ -49,7 +54,6 @@ app.get("/", async (req, res) => {
 app.post("/greet", async (req, res) => {
     greetUsersInstance.setLanguage(req.body.greetingLanguage);
     greetUsersInstance.setUserName(req.body.nameInput);
-
 
     if (req.body.greetingLanguage && req.body.nameInput) {
         await db.none("INSERT INTO greetings (username, counter) VALUES ($1, $2) ON CONFLICT (username) DO UPDATE SET counter = greetings.counter + 1", [req.body.nameInput, 1]);
@@ -78,11 +82,11 @@ app.get("/counter/:username", async (req, res) => {
     res.render("user_count", userData);
 });
 
-app.post("/reset", async (req, res)=>{
-    // await db.none("DELETE FROM greetings");
-    res.redirect("/")
-});
+app.get("/reset", async (req, res) => {
+    await db.none("DELETE FROM greetings");
 
+    res.redirect("/");
+});
 
 let PORT = process.env.PORT || 3000;
 
