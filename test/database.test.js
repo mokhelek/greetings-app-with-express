@@ -9,9 +9,9 @@ const databaseInteractionInstance = databaseInteraction(db);
 describe("The basic database web app", function () {
     this.timeout(6000);
 
-    beforeEach(async function () {
-        await db.none("TRUNCATE TABLE greetingstest RESTART IDENTITY CASCADE;");
-    });
+    // beforeEach(async function () {
+    //     await db.none("TRUNCATE TABLE greetingstest RESTART IDENTITY CASCADE;");
+    // });
 
     it("should able to add user ", async function () {
         await databaseInteractionInstance.addUser({ username: "Tom" });

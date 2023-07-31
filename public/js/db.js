@@ -7,7 +7,6 @@ const connection = {
     database: 'greetings_postgresql',
     user: 'greetings_postgresql_user',
     password: process.env.DATABASE_PASSWORD,
-    max: 30,
     ssl: true
 
 };
