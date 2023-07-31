@@ -33,7 +33,8 @@ let greetUsersInstance = greetUsers();
 app.get("/", async (req, res) => {
     let userGreeting = false;
     console.log( greetUsersInstance.getUserGreeting() )
-    if( greetUsersInstance.getUserGreeting() != "undefined," ){
+
+    if( greetUsersInstance.getUserGreeting().includes("Molo" ) ||greetUsersInstance.getUserGreeting().includes("Hello") || greetUsersInstance.getUserGreeting().includes("Dumela")){
         userGreeting = greetUsersInstance.getUserGreeting();
     }
 
