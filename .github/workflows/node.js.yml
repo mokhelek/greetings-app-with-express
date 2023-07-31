@@ -13,9 +13,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env: 
-      DATABASE_HOST: dpg-cj1p1d6nqqla1dibjvs0-a.oregon-postgres.render.com
-      DATABASE_PASSWORD: TvueAuamk9ZUOc7UjzSUIoTbzAENDNiF
 
     strategy:
       matrix:
