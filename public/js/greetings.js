@@ -67,18 +67,25 @@ export default function greetUsers() {
 
     }
 
-    async function addUser(db){
-   
-        
+    async function addUser(db, language, username){
+        if (language && username) {
+            await db.none("INSERT INTO greetings (username, counter) VALUES ($1, $2) ON CONFLICT (username) DO UPDATE SET counter = greetings.counter + 1", [username, 1]);
+        } 
+    }
 
-        return {
-           
-        }
-
+    async function greetedUsers(db){
+        let greetedUsers = await db.any("SELECT * FROM greetings")
+        return greetedUsers ;
     }
 
 
+    async function userCounter(db , username){
+        return await db.oneOrNone("SELECT * FROM greetings WHERE username = $1", [username] ); ;
+    }
 
+    async function resetData(db){
+        await db.none("DELETE FROM greetings");
+    }
 
 
     return {
@@ -92,6 +99,9 @@ export default function greetUsers() {
 
         homePage,
         addUser,
+        greetedUsers,
+        userCounter,
+        resetData
         
       
     };
