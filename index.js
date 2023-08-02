@@ -48,7 +48,6 @@ app.get("/counter/:username", async (req, res) => {
 
 app.get("/reset", async (req, res) => {
     greetUsersInstance.resetData(db);
-    
     res.redirect("/");
 });
 

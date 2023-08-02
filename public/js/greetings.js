@@ -12,6 +12,12 @@ export default function greetUsers() {
         return greetedUserName;
     }
 
+    function toTitleCase(str) {
+        return str.replace(/\w\S*/g, function(txt) {
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+      }
+      
  
     function setLanguage(language) {
         greetLanguage = language;
@@ -69,7 +75,7 @@ export default function greetUsers() {
 
     async function addUser(db, language, username){
         if (language && username) {
-            await db.none("INSERT INTO greetings (username, counter) VALUES ($1, $2) ON CONFLICT (username) DO UPDATE SET counter = greetings.counter + 1", [username, 1]);
+            await db.none("INSERT INTO greetings (username, counter) VALUES ($1, $2) ON CONFLICT (username) DO UPDATE SET counter = greetings.counter + 1", [toTitleCase(username) , 1]);
         } 
     }
 
