@@ -19,7 +19,7 @@ app.use(
 
 app.use(flash());
 
-app.use(express.static("public")); // * Set the static files folder
+app.use(express.static("public")); 
 
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
@@ -31,24 +31,10 @@ app.use(bodyParser.json());
 let greetUsersInstance = greetUsers();
 
 app.get("/", async (req, res) => {
-    let userGreeting = false;
-    console.log( greetUsersInstance.getUserGreeting() )
-
-    if( greetUsersInstance.getUserGreeting().includes("Molo" ) ||greetUsersInstance.getUserGreeting().includes("Hello") || greetUsersInstance.getUserGreeting().includes("Dumela")){
-        userGreeting = greetUsersInstance.getUserGreeting();
-    }
-
-    let userCount = 0;
-
-    let greetedUsersData = await db.any("SELECT * FROM greetings");
-
-    for (let i = 0; i < greetedUsersData.length; i++) {
-        userCount += Number(greetedUsersData[i].counter);
-    }
-
+    const homePage = await greetUsersInstance.homePage(db)
     res.render("home", {
-        userCount,
-        userGreeting,
+        userCount: homePage.userCount,
+        userGreeting: homePage.userGreeting,
     });
 });
 

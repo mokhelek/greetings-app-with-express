@@ -1,9 +1,8 @@
 export default function greetUsers() {
-    // var greetCounter = counter || 0;
-
+  
     let greetedUserName = "";
     let greetLanguage = "";
-    // var greetedUsers = {};
+
 
     function setUserName(userName) {
         greetedUserName = userName.toLowerCase();
@@ -13,24 +12,7 @@ export default function greetUsers() {
         return greetedUserName;
     }
 
-    /*
-    function setCounter() {
-        if (greetedUsers[getUserName()] === undefined && getUserName() != "" ) {
-            greetCounter++;
-            greetedUsers[getUserName()] = 0;
-           
-        }else{
-            userExist(false);
-        }
-        greetedUsers[getUserName()]++;
-    }
  
-    
-    function getCounter() {
-       
-        return greetCounter;
-    }
-   */
     function setLanguage(language) {
         greetLanguage = language;
     }
@@ -50,14 +32,10 @@ export default function greetUsers() {
             return "Dumela";
         }
     }
-    /*
-    function getGreetedUsers() {
-        return greetedUsers;
-    }
-    */
+ 
 
     function getUserGreeting() {
-        // setCounter();
+
         return getLanguagesGreet() + ", " + greetedUserName;
     }
 
@@ -66,17 +44,55 @@ export default function greetUsers() {
         return regex.test(userName);
     }
 
+
+    async function homePage(db){
+        let userGreeting = false;
+        let userCount = 0;
+
+        
+        if( getUserGreeting().includes("Molo" ) || getUserGreeting().includes("Hello") || getUserGreeting().includes("Dumela")){
+            userGreeting = getUserGreeting();
+        }
+    
+        let greetedUsersData = await db.any("SELECT * FROM greetings");
+    
+        for (let i = 0; i < greetedUsersData.length; i++) {
+            userCount += Number(greetedUsersData[i].counter);
+        }
+
+        return {
+            userGreeting,
+            userCount
+        }
+
+    }
+
+    async function addUser(db){
+   
+        
+
+        return {
+           
+        }
+
+    }
+
+
+
+
+
     return {
         getUserName,
-        // getCounter,
         getLanguage,
         getUserGreeting,
         getLanguagesGreet,
-        // getGreetedUsers,
         setLanguage,
         setUserName,
-
         checkValidName,
-        // userExist,
+
+        homePage,
+        addUser,
+        
+      
     };
 }
