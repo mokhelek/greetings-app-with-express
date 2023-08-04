@@ -3,7 +3,7 @@ export default function greetUsers() {
     let greetLanguage = "";
 
     function setUserName(userName) {
-        greetedUserName = userName.toLowerCase();
+        greetedUserName =  toTitleCase(userName) ;
     }
 
     function getUserName() {
@@ -46,6 +46,7 @@ export default function greetUsers() {
     }
 
     async function homePage(db) {
+        let greetedUsersData = await db.any("SELECT * FROM greetings");
         let userGreeting = false;
         let userCount = 0;
 
@@ -53,11 +54,10 @@ export default function greetUsers() {
             userGreeting = getUserGreeting();
         }
 
-        let greetedUsersData = await db.any("SELECT * FROM greetings");
-
         for (let i = 0; i < greetedUsersData.length; i++) {
             userCount += Number(greetedUsersData[i].counter);
         }
+        console.log(getUserGreeting());
 
         return {
             userGreeting,
@@ -68,6 +68,8 @@ export default function greetUsers() {
     async function addUser(db, language, username, req) {
         if (language && username) {
             await db.none("INSERT INTO greetings (username, counter) VALUES ($1, $2) ON CONFLICT (username) DO UPDATE SET counter = greetings.counter + 1", [toTitleCase(username), 1]);
+            setLanguage(language)
+            setUserName(username)
         } else {
             if (username && !language) {
                 req.flash("info", "Please select a language");

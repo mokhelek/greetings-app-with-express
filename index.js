@@ -1,8 +1,12 @@
 import express from "express";
 import { engine } from "express-handlebars";
 import bodyParser from "body-parser";
-import greetUsers from "./public/js/greetings.js";
-import db from "./public/js/db.js";
+// import greetUsers from "./public/js/greetings.js";
+import greetUsers from "./greetings.js"
+
+// import db from "./public/js/db.js";
+import db from "./model/db.js";
+
 import flash from "express-flash";
 import session from "express-session";
 

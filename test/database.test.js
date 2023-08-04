@@ -1,8 +1,10 @@
 import assert from "assert";
 
-import db from "../public/js/db.js";
+// import db from "../public/js/db.js";
+import db from "../model/db.js";
 
-import databaseInteraction from "../public/js/databaseLogic.js";
+// import databaseInteraction from "../public/js/databaseLogic.js";
+import databaseInteraction from "../model/databaseLogic.js";
 
 const databaseInteractionInstance = databaseInteraction(db);
 
