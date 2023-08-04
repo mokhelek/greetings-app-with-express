@@ -1,8 +1,6 @@
 export default function greetUsers() {
-  
     let greetedUserName = "";
     let greetLanguage = "";
-
 
     function setUserName(userName) {
         greetedUserName = userName.toLowerCase();
@@ -13,12 +11,11 @@ export default function greetUsers() {
     }
 
     function toTitleCase(str) {
-        return str.replace(/\w\S*/g, function(txt) {
-          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
         });
-      }
-      
- 
+    }
+
     function setLanguage(language) {
         greetLanguage = language;
     }
@@ -38,10 +35,8 @@ export default function greetUsers() {
             return "Dumela";
         }
     }
- 
 
     function getUserGreeting() {
-
         return getLanguagesGreet() + ", " + greetedUserName;
     }
 
@@ -50,49 +45,52 @@ export default function greetUsers() {
         return regex.test(userName);
     }
 
-
-    async function homePage(db){
+    async function homePage(db) {
         let userGreeting = false;
         let userCount = 0;
 
-        
-        if( getUserGreeting().includes("Molo" ) || getUserGreeting().includes("Hello") || getUserGreeting().includes("Dumela")){
+        if (getUserGreeting().includes("Molo") || getUserGreeting().includes("Hello") || getUserGreeting().includes("Dumela")) {
             userGreeting = getUserGreeting();
         }
-    
+
         let greetedUsersData = await db.any("SELECT * FROM greetings");
-    
+
         for (let i = 0; i < greetedUsersData.length; i++) {
             userCount += Number(greetedUsersData[i].counter);
         }
 
         return {
             userGreeting,
-            userCount
-        }
-
+            userCount,
+        };
     }
 
-    async function addUser(db, language, username){
+    async function addUser(db, language, username, req) {
         if (language && username) {
-            await db.none("INSERT INTO greetings (username, counter) VALUES ($1, $2) ON CONFLICT (username) DO UPDATE SET counter = greetings.counter + 1", [toTitleCase(username) , 1]);
-        } 
+            await db.none("INSERT INTO greetings (username, counter) VALUES ($1, $2) ON CONFLICT (username) DO UPDATE SET counter = greetings.counter + 1", [toTitleCase(username), 1]);
+        } else {
+            if (username && !language) {
+                req.flash("info", "Please select a language");
+            } else if (language && !username) {
+                req.flash("info", "Please enter your name");
+            } else {
+                req.flash("info", "Both name and language are needed");
+            }
+        }
     }
 
-    async function greetedUsers(db){
-        let greetedUsers = await db.any("SELECT * FROM greetings")
-        return greetedUsers ;
+    async function greetedUsers(db) {
+        let greetedUsers = await db.any("SELECT * FROM greetings");
+        return greetedUsers;
     }
 
-
-    async function userCounter(db , username){
-        return await db.oneOrNone("SELECT * FROM greetings WHERE username = $1", [username] ); ;
+    async function userCounter(db, username) {
+        return await db.oneOrNone("SELECT * FROM greetings WHERE username = $1", [username]);
     }
 
-    async function resetData(db){
+    async function resetData(db) {
         await db.none("DELETE FROM greetings");
     }
-
 
     return {
         getUserName,
@@ -107,8 +105,6 @@ export default function greetUsers() {
         addUser,
         greetedUsers,
         userCounter,
-        resetData
-        
-      
+        resetData,
     };
 }

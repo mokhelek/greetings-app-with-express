@@ -25,6 +25,7 @@ app.use(bodyParser.json());
 
 let greetUsersInstance = greetUsers();
 
+
 app.get("/", async (req, res) => {
     const homePage = await greetUsersInstance.homePage(db);
     res.render("home", {
@@ -36,15 +37,13 @@ app.get("/", async (req, res) => {
 
 app.get("/greeted", async (req, res) => {
     const greetedUsers = await greetUsersInstance.greetedUsers(db);
-    res.render("greeted_users", { greetedUsersData : greetedUsers });
+    res.render("greeted_users", { greetedUsersData: greetedUsers });
 });
-
 
 app.get("/counter/:username", async (req, res) => {
-    const userData = await greetUsersInstance.userCounter(db, req.params.username)
+    const userData = await greetUsersInstance.userCounter(db, req.params.username);
     res.render("user_count", userData);
 });
-
 
 app.get("/reset", async (req, res) => {
     greetUsersInstance.resetData(db);
@@ -52,23 +51,13 @@ app.get("/reset", async (req, res) => {
 });
 
 app.post("/greet", async (req, res) => {
-    if (req.body.nameInput && req.body.greetingLanguage) {
-        await greetUsersInstance.addUser(db, req.body.greetingLanguage, req.body.nameInput);
-    } else {
-        if (req.body.nameInput && !req.body.greetingLanguage) {
-            req.flash("info", "Please select a language");
-        } else if (req.body.greetingLanguage && !req.body.nameInput) {
-            req.flash("info", "Please enter your name");
-        } else {
-            req.flash("info", "Both name and language are needed");
-        }
-    }
-
+    await greetUsersInstance.addUser(db, req.body.greetingLanguage, req.body.nameInput, req);
     res.redirect("/");
 });
 
-let PORT = process.env.PORT || 3000;
 
+
+let PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
     console.log("App starting on port", PORT);
 });

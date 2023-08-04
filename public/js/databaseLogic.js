@@ -27,13 +27,7 @@ export default function databaseInteraction(db) {
         return results;
     }
 
-    // async function update(category) {
-    //     return await db.none("UPDATE categories SET description = $1 WHERE id = $2", [category.description, category.id]);
-    // }
 
-    // async function deleteOne(id) {
-    //     return await db.none("DELETE FROM categories WHERE id = $1", [id]);
-    // }
 
     return {
         all,
@@ -42,7 +36,6 @@ export default function databaseInteraction(db) {
         getGreeted,
         getUserData,
 
-        // delete: deleteOne,
-        // update
+       
     };
 }
