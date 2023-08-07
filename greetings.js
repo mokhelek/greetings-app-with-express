@@ -48,15 +48,15 @@ export default function greetUsers() {
     async function homePage(db) {
         let greetedUsersData = await db.any("SELECT * FROM greetings");
         let userGreeting = false;
-        let userCount = 0;
+        let userCount = greetedUsersData.length;
 
         if (getUserGreeting().includes("Molo") || getUserGreeting().includes("Hello") || getUserGreeting().includes("Dumela")) {
             userGreeting = getUserGreeting();
         }
 
-        for (let i = 0; i < greetedUsersData.length; i++) {
-            userCount += Number(greetedUsersData[i].counter);
-        }
+        // for (let i = 0; i < greetedUsersData.length; i++) {
+        //     userCount += Number(greetedUsersData[i].counter);
+        // }
         console.log(getUserGreeting());
 
         return {
